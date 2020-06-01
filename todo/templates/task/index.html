@@ -1,0 +1,27 @@
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="container">
+<h3>Todo</h3>
+
+<form method="POST" action="/">
+    {% csrf_token %}
+    {{forms.title}}
+    <input type="submit" name="create_task">
+</form>
+{% for task in tasks %}
+ <div class="container">
+     <table class="table table-dark table-striped">
+         <tr>
+     {% if task.complete == True %}
+             <th><strike>{{task}}</strike></th>
+     {% else %}
+     <th><p>{{task}}</p></th>
+     {% endif %}
+     <th><a href="{% url 'update' task.id %}" class="btn btn-info" role="button">Update</a></th>
+             <th><a href="{% url 'delete' task.id %}" class="btn btn-info" role="button">Delete</a></th>
+         </tr>
+
+      </div>
+ </div>
+{% endfor %}
